@@ -1,10 +1,13 @@
 import React from "react";
+import classes from "./Score.css";
 
 const score = props => {
-  let x;
   return (
     <React.Fragment>
-      <h1>{props.newScore}</h1>
+      <div className={classes.Score}>
+        <p>{props.newScoreTeam1}</p>
+        <p>{props.newScoreTeam2}</p>
+      </div>
       <p>{props.newStat}</p>
     </React.Fragment>
   );

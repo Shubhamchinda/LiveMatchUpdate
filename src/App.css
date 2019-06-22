@@ -1,10 +1,18 @@
 .App {
-  width: 200px;
-  color: red;
-  margin: auto;
-  height: 250px;
-  overflow: scroll;
+  background-color: #f9f9fa;
+  border-radius: 5%;
   text-align: center;
+  margin: 150px 450px 200px 450px;
+  width: 50%;
+  height: 500px;
   font-weight: bold;
   font-size: 1.2rem;
+  box-shadow: 1px 1px 2px 2px black;
 }
+/* .Image {
+  background-image: url(https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1467&q=80);
+  width: 2000px;
+  height: 100%;
+  margin-top: 0;
+  background-repeat: no-repeat;
+} */

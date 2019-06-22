@@ -1,0 +1,7 @@
+.Score {
+  margin: 50px 150px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
