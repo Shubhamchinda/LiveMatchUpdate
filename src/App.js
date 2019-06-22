@@ -11,14 +11,15 @@ class CricAPI extends Component {
     stat: "",
     team1: ``,
     team2: ``,
-    firstRun: true
+    firstRun: true,
+    matchStart: false
   };
 
   componentDidMount() {
     if (this.state.firstRun) {
       axios
         .get(
-          "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144511"
+          "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144512"
         )
         .then(response => {
           console.log(response.data);
@@ -27,7 +28,8 @@ class CricAPI extends Component {
             stat: response.data.stat,
             team1: response.data["team-1"],
             team2: response.data["team-2"],
-            firstRun: false
+            firstRun: false,
+            matchStart: response.data.matchStarted
           });
         })
         .catch(function(error) {
@@ -44,15 +46,16 @@ class CricAPI extends Component {
         console.log("You will see this message every 2nd minute");
         axios
           .get(
-            "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144511"
+            "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144512"
           )
           .then(response => {
-            console.log(response.data);
+            console.log(response.data.matchStarted);
             this.setState({
               score: response.data.score,
               stat: response.data.stat,
               team1: response.data["team-1"],
-              team2: response.data["team-2"]
+              team2: response.data["team-2"],
+              matchStart: response.data.matchStarted
             });
           })
           .catch(function(error) {
@@ -70,15 +73,21 @@ class CricAPI extends Component {
 
   render() {
     return (
-      <div className={classes.Image}>
+      <div>
         <div className={classes.App}>
           <h1 style={{ paddingTop: 25 }}>Cricket World Cup</h1>
-          <Teams teamOne={this.state.team1} teamTwo={this.state.team2} />
-          <Score
-            newScoreTeam1={this.state.score.split("v").shift()}
-            newScoreTeam2={this.state.score.split("v").pop()}
-            newStat={this.state.stat}
+          <Teams
+            teamOne={this.state.team1}
+            teamTwo={this.state.team2}
+            matchStarted={this.state.matchStart}
           />
+          {this.state.matchStart ? (
+            <Score
+              newScoreTeam1={this.state.score.split("v").shift()}
+              newScoreTeam2={this.state.score.split("v").pop()}
+              newStat={this.state.stat}
+            />
+          ) : null}
         </div>
       </div>
     );
