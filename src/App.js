@@ -7,10 +7,10 @@ import Teams from "./Teams";
 
 class CricAPI extends Component {
   state = {
-    score: "",
-    stat: "",
-    team1: ``,
-    team2: ``,
+    score: "india 220/1 v pakistan 230/10",
+    stat: "India is trailing by 10 runs",
+    team1: `India`,
+    team2: `Pakistan`,
     firstRun: true,
     matchStart: false
   };
@@ -41,7 +41,7 @@ class CricAPI extends Component {
         });
     }
     new CronJob(
-      "*/5 * * * *",
+      "*/2 * * * *",
       () => {
         console.log("You will see this message every 2nd minute");
         axios

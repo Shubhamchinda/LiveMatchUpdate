@@ -20,6 +20,13 @@ const teams = props => {
         )}
         <img src={link1} alt={props.teamTwo} />
       </div>
+      {!props.matchStarted ? (
+        <h4>
+          {props.teamOne} <br />
+          vs
+          <br /> {props.teamTwo}
+        </h4>
+      ) : null}
     </React.Fragment>
   );
 };
