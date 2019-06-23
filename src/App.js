@@ -4,6 +4,7 @@ import cron, { CronJob } from "cron";
 import Score from "./Score";
 import classes from "./App.css";
 import Teams from "./Teams";
+import Spinner from "./Spinner";
 
 class CricAPI extends Component {
   state = {
@@ -12,14 +13,15 @@ class CricAPI extends Component {
     team1: `India`,
     team2: `Pakistan`,
     firstRun: true,
-    matchStart: false
+    matchStart: false,
+    loading: true
   };
 
   componentDidMount() {
     if (this.state.firstRun) {
       axios
         .get(
-          "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144512"
+          "https://cricapi.com/api/cricketScore?apikey=Aa74ktAdYXVl4MGv4NIc2vE19yx1&unique_id=1144512"
         )
         .then(response => {
           console.log(response.data);
@@ -29,11 +31,13 @@ class CricAPI extends Component {
             team1: response.data["team-1"],
             team2: response.data["team-2"],
             firstRun: false,
-            matchStart: response.data.matchStarted
+            matchStart: response.data.matchStarted,
+            loading: false
           });
         })
-        .catch(function(error) {
+        .catch(error => {
           // handle error
+          this.setState({ loading: false });
           console.log(error);
         })
         .finally(function() {
@@ -46,16 +50,13 @@ class CricAPI extends Component {
         console.log("You will see this message every 2nd minute");
         axios
           .get(
-            "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144512"
+            "https://cricapi.com/api/cricketScore?apikey=Aa74ktAdYXVl4MGv4NIc2vE19yx1&unique_id=1144512"
           )
           .then(response => {
             console.log(response.data.matchStarted);
             this.setState({
               score: response.data.score,
-              stat: response.data.stat,
-              team1: response.data["team-1"],
-              team2: response.data["team-2"],
-              matchStart: response.data.matchStarted
+              stat: response.data.stat
             });
           })
           .catch(function(error) {
@@ -72,8 +73,9 @@ class CricAPI extends Component {
   }
 
   render() {
-    return (
-      <div>
+    let loadSpin = <Spinner />;
+    if (!this.state.loading) {
+      loadSpin = (
         <div className={classes.App}>
           <h1 style={{ paddingTop: 25 }}>Cricket World Cup</h1>
           <Teams
@@ -91,8 +93,9 @@ class CricAPI extends Component {
             <Score newStat={this.state.stat} />
           )}
         </div>
-      </div>
-    );
+      );
+    }
+    return <div>{loadSpin}</div>;
   }
 }
 

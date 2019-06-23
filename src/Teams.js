@@ -13,11 +13,7 @@ const teams = props => {
     <React.Fragment>
       <div className={classes.Teams}>
         <img src={link} alt={props.teamOne} />
-        {props.matchStarted ? (
-          <p>Match has Started</p>
-        ) : (
-          <p>Match is yet to start</p>
-        )}
+        {props.matchStarted ? <p>Live</p> : <p>Match is yet to start</p>}
         <img src={link1} alt={props.teamTwo} />
       </div>
       {!props.matchStarted ? (
