@@ -7,8 +7,8 @@ import Teams from "./Teams";
 
 class CricAPI extends Component {
   state = {
-    score: "india 220/1 v pakistan 230/10",
-    stat: "India is trailing by 10 runs",
+    score: "India v Pakistan",
+    stat: "Internet is not good, try connecting again.",
     team1: `India`,
     team2: `Pakistan`,
     firstRun: true,
@@ -87,7 +87,9 @@ class CricAPI extends Component {
               newScoreTeam2={this.state.score.split("v").pop()}
               newStat={this.state.stat}
             />
-          ) : null}
+          ) : (
+            <Score newStat={this.state.stat} />
+          )}
         </div>
       </div>
     );
