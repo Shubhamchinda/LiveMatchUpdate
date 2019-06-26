@@ -1,0 +1,10 @@
+.Table tbody,
+td {
+  width: 80%;
+  background-color: #ededf0;
+  text-align: left;
+  border-collapse: collapse;
+}
+.ScoreCardOne {
+  text-align: left;
+}
