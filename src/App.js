@@ -76,8 +76,6 @@ class CricAPI extends Component {
     //       .all([this.getMatch(), this.getScoreCard()])
     //       .then(
     //         axios.spread((match, scrCard) => {
-    //           console.log(match.data);
-    //           console.log(scrCard);
     //           this.setState({
     //             score: match.data.score,
     //             stat: match.data.stat

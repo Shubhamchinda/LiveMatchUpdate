@@ -9,7 +9,6 @@ const score = props => {
   let batCard = [];
   let bowlCard = [];
   if (props.batting && props.batting[1] && props.batting[1].scores) {
-    console.log(props.bowling[1]);
     batCard = <Battings battings={props.batting[1]} />;
     bowlCard = <Bowlings bowlings={props.bowling[1]} />;
   }

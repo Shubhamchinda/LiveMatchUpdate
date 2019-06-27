@@ -3,10 +3,6 @@ import Async from "async";
 
 var extras = 0;
 const battings = props => {
-  {
-    console.log(props.battings.scores);
-  }
-
   let batscore = [
     <tr key="232">
       <th>Player</th>
@@ -18,7 +14,6 @@ const battings = props => {
     </tr>
   ];
   if (props.battings && !props.battings.scores.length) {
-    console.log("no score");
     batscore = (
       <tr style={{ textAlign: "center", width: "80%" }}>
         <th>
@@ -27,7 +22,6 @@ const battings = props => {
       </tr>
     );
   } else if (props.battings && props.battings.scores.length) {
-    console.log(props.battings);
     Async.each(props.battings.scores, async value => {
       if (value.batsman === "Extras") {
         extras = value.detail;
@@ -43,7 +37,6 @@ const battings = props => {
         "dismissal-info": dismiss,
         pid
       } = value;
-      console.log(batsman, R, SR);
       await batscore.push(
         <tr key={`${pid}1`}>
           <td>

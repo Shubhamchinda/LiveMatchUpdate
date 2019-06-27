@@ -14,7 +14,6 @@ const bowling = props => {
     </tr>
   ];
   if (props.bowlings && !props.bowlings.scores.length) {
-    console.log("no score");
     bowling = (
       <tr style={{ textAlign: "center", width: "80%" }}>
         <th>
@@ -29,7 +28,6 @@ const bowling = props => {
         return false;
       }
       const { bowler, R, O, M, Econ, W, pid } = value;
-      console.log(bowler, R, O);
       bowling.push(
         <tr key={pid}>
           <td>{bowler}</td>
