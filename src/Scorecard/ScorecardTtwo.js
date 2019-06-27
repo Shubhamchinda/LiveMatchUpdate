@@ -5,7 +5,7 @@ import Battings from "./battings";
 import Bowlings from "./bowlings";
 
 const score = props => {
-  console.log(props.batting && props.batting[1] && props.batting[1].scores);
+  console.log(props.batting && props.batting[1] && props.batting);
   let batCard = [];
   let bowlCard = [];
   if (props.batting && props.batting[1] && props.batting[1].scores) {

@@ -8,6 +8,8 @@ import Spinner from "./Spinner";
 import ScoreCardOne from "./../src/Scorecard/ScorecardTone";
 import ScoreCardTwo from "./../src/Scorecard/ScorecardTtwo";
 
+let scoreCards = [];
+
 class CricAPI extends Component {
   state = {
     score: "India v Pakistan",
@@ -20,17 +22,19 @@ class CricAPI extends Component {
     scoreCard: {},
     batting: [],
     bowling: [],
-    scoreCards: []
+    scoreCards: [],
+    showTeamOne: true,
+    showTeamTwo: false
   };
   getMatch = () => {
     return axios.get(
-      "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144516"
+      "https://cricapi.com/api/cricketScore?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144516"
     );
   };
 
   getScoreCard = () => {
     return axios.get(
-      "https://cricapi.com/api/fantasySummary?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144516"
+      "https://cricapi.com/api/fantasySummary?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144516"
     );
   };
 
@@ -52,10 +56,11 @@ class CricAPI extends Component {
               matchStart: match.data.matchStarted,
               loading: false
             });
+
             this.setState({
               scoreCard: scrCard.data,
-              batting: [...scrCard.data.data.batting],
-              bowling: [...scrCard.data.data.bowling]
+              batting: scrCard.data.data.batting,
+              bowling: scrCard.data.data.bowling
             });
             // Both requests are now complete
           })
@@ -69,23 +74,51 @@ class CricAPI extends Component {
         });
     }
     new CronJob(
-      "*/20 * * * * *",
+      "*/1 * * * *",
       () => {
         console.log("You will see this message every 20th second");
         axios
           .all([this.getMatch(), this.getScoreCard()])
           .then(
             axios.spread((match, scrCard) => {
+              console.log(match.data);
+              console.log(scrCard);
               this.setState({
                 score: match.data.score,
                 stat: match.data.stat
               });
+              if (this.state.showTeamOne) {
+                this.setState({
+                  scoreCards: (
+                    <ScoreCardOne
+                      key="2324"
+                      // data={this.state.scoreCard ? this.state.scoreCard.data : []}
+                      batting={this.state.batting ? this.state.batting : []}
+                      bowling={this.state.bowling ? this.state.bowling : []}
+                      teamOne={this.state.team1}
+                    />
+                  )
+                });
+              } else {
+                this.setState({
+                  scoreCards: [
+                    <ScoreCardTwo
+                      key="232asa4"
+                      data={
+                        this.state.scoreCard ? this.state.scoreCard.data : []
+                      }
+                      batting={this.state.batting ? this.state.batting : []}
+                      bowling={this.state.bowling ? this.state.bowling : []}
+                      teamOne={this.state.team2}
+                    />
+                  ]
+                });
+              }
               this.setState({
                 scoreCard: scrCard.data,
-                batting: [...scrCard.data.data.batting],
-                bowling: [...scrCard.data.data.bowling]
+                batting: scrCard.data.data.batting,
+                bowling: scrCard.data.data.bowling
               });
-              // Both requests are now complete
             })
           )
           .catch(error => {
@@ -100,27 +133,33 @@ class CricAPI extends Component {
       true
     );
   }
+
   selectTeamScore1 = () => {
-    let one = (
-      <ScoreCardOne
-        // data={this.state.scoreCard ? this.state.scoreCard.data : []}
-        batting={this.state.batting ? this.state.batting : []}
-        bowling={this.state.bowling ? this.state.bowling : []}
-        teamOne={this.state.team2}
-      />
-    );
     this.setState({
-      scoreCards: [one]
+      scoreCards: [
+        <ScoreCardOne
+          key="2324"
+          // data={this.state.scoreCard ? this.state.scoreCard.data : []}
+          batting={this.state.batting ? this.state.batting : []}
+          bowling={this.state.bowling ? this.state.bowling : []}
+          teamOne={this.state.team1}
+        />
+      ],
+      showTeamOne: true,
+      showTeamTwo: false
     });
   };
   selectTeamScore2 = () => {
     this.setState({
+      showTeamOne: false,
+      showTeamTwo: true,
       scoreCards: [
         <ScoreCardTwo
-          data={this.state.scoreCard ? this.state.scoreCard.data : []}
+          key="2324"
+          // data={this.state.scoreCard ? this.state.scoreCard.data : []}
           batting={this.state.batting ? this.state.batting : []}
           bowling={this.state.bowling ? this.state.bowling : []}
-          teamOne={this.state.team2}
+          teamOne={this.state.team1}
         />
       ]
     });
