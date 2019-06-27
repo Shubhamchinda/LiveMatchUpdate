@@ -74,9 +74,9 @@ class CricAPI extends Component {
         });
     }
     new CronJob(
-      "*/1 * * * *",
+      "*/2 * * * *",
       () => {
-        console.log("You will see this message every 20th second");
+        console.log("You will see this message every 2nd minute");
         axios
           .all([this.getMatch(), this.getScoreCard()])
           .then(
