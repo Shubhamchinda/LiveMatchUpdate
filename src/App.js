@@ -30,7 +30,7 @@ class CricAPI extends Component {
 
   getScoreCard = () => {
     return axios.get(
-      "https://cricapi.com/api/fantasySummary?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
+      "https://cricapi.com/api/fantasySummary?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144516"
     );
   };
 
@@ -68,37 +68,37 @@ class CricAPI extends Component {
           // always executed
         });
     }
-    // new CronJob(
-    //   "*/20 * * * * *",
-    //   () => {
-    //     console.log("You will see this message every 20th second");
-    //     axios
-    //       .all([this.getMatch(), this.getScoreCard()])
-    //       .then(
-    //         axios.spread((match, scrCard) => {
-    //           this.setState({
-    //             score: match.data.score,
-    //             stat: match.data.stat
-    //           });
-    //           this.setState({
-    //             scoreCard: scrCard.data,
-    //             batting: [...scrCard.data.data.batting],
-    //             bowling: [...scrCard.data.data.bowling]
-    //           });
-    //           // Both requests are now complete
-    //         })
-    //       )
-    //       .catch(error => {
-    //         // handle error
-    //         console.log(error);
-    //       })
-    //       .finally(function() {
-    //         // always executed
-    //       });
-    //   },
-    //   null,
-    //   true
-    // );
+    new CronJob(
+      "*/20 * * * * *",
+      () => {
+        console.log("You will see this message every 20th second");
+        axios
+          .all([this.getMatch(), this.getScoreCard()])
+          .then(
+            axios.spread((match, scrCard) => {
+              this.setState({
+                score: match.data.score,
+                stat: match.data.stat
+              });
+              this.setState({
+                scoreCard: scrCard.data,
+                batting: [...scrCard.data.data.batting],
+                bowling: [...scrCard.data.data.bowling]
+              });
+              // Both requests are now complete
+            })
+          )
+          .catch(error => {
+            // handle error
+            console.log(error);
+          })
+          .finally(function() {
+            // always executed
+          });
+      },
+      null,
+      true
+    );
   }
   selectTeamScore1 = () => {
     let one = (
