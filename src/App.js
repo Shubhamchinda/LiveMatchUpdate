@@ -24,7 +24,7 @@ class CricAPI extends Component {
   };
   getMatch = () => {
     return axios.get(
-      "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
+      "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144516"
     );
   };
 
@@ -169,7 +169,7 @@ class CricAPI extends Component {
 
           <div>
             <h3 style={{ color: "#a4000f" }}>
-              Click on team name to view Scorecard
+              Click on team's name to view Scorecard
             </h3>
             {onclickTeam}
             {this.state.scoreCards}

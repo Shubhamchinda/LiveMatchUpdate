@@ -17,8 +17,16 @@ const battings = props => {
       <th>SR</th>
     </tr>
   ];
-
-  if (props.battings && props.battings.scores[0]) {
+  if (props.battings && !props.battings.scores.length) {
+    console.log("no score");
+    batscore = (
+      <tr style={{ textAlign: "center", width: "80%" }}>
+        <th>
+          <p>Yet to Bat</p>
+        </th>
+      </tr>
+    );
+  } else if (props.battings && props.battings.scores.length) {
     console.log(props.battings);
     Async.each(props.battings.scores, async value => {
       if (value.batsman === "Extras") {

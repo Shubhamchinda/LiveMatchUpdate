@@ -23,10 +23,12 @@
   height: 10px;
 }
 .App th {
+  border-radius: 15%;
   margin: auto;
   height: 20px;
   font-size: 1.3rem;
-  /* background-color: #ededf0; */
+  width: 50%;
+  background-color: #ededf0;
 }
 @media (min-width: 500px) and (min-height: 400px) {
   .App {
@@ -58,7 +60,7 @@
     border-radius: 1%;
     text-align: center;
     margin: auto;
-    width: 60%;
+    width: 50%;
     height: 2100px;
     font-weight: bold;
     font-size: 1.2rem;
