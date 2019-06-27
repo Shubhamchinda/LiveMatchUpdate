@@ -7,4 +7,5 @@ td {
 }
 .ScoreCardOne {
   text-align: left;
+  transition: 0.5s;
 }

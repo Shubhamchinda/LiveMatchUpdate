@@ -22,52 +22,46 @@ class CricAPI extends Component {
     bowling: [],
     scoreCards: []
   };
+  getMatch = () => {
+    return axios.get(
+      "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
+    );
+  };
+
+  getScoreCard = () => {
+    return axios.get(
+      "https://cricapi.com/api/fantasySummary?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
+    );
+  };
+
   // var scoreCard = [];
   componentDidMount() {
     if (this.state.firstRun) {
       axios
-        .get(
-          "https://cricapi.com/api/cricketScore?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
+        .all([this.getMatch(), this.getScoreCard()])
+        .then(
+          axios.spread((match, scrCard) => {
+            console.log(match.data);
+            console.log(scrCard);
+            this.setState({
+              score: match.data.score,
+              stat: match.data.stat,
+              team1: match.data["team-1"],
+              team2: match.data["team-2"],
+              firstRun: false,
+              matchStart: match.data.matchStarted,
+              loading: false
+            });
+            this.setState({
+              scoreCard: scrCard.data,
+              batting: [...scrCard.data.data.batting],
+              bowling: [...scrCard.data.data.bowling]
+            });
+            // Both requests are now complete
+          })
         )
-        .then(response => {
-          console.log(response.data);
-          this.setState({
-            score: response.data.score,
-            stat: response.data.stat,
-            team1: response.data["team-1"],
-            team2: response.data["team-2"],
-            firstRun: false,
-            matchStart: response.data.matchStarted,
-            loading: false
-          });
-          if (this.state.matchStart) {
-            axios
-              .get(
-                "https://cricapi.com/api/fantasySummary?apikey=ArPh3wmOLGgKDv0mfa7grHuxYjq1&unique_id=1144515"
-              )
-              .then(response => {
-                console.log(response.data.data);
-
-                this.setState({
-                  scoreCard: response.data,
-                  batting: [...response.data.data.batting],
-                  bowling: [...response.data.data.bowling]
-                });
-
-                console.log(this.state.scoreCard);
-              })
-              .catch(error => {
-                // handle error
-                console.log(error);
-              })
-              .finally(function() {
-                // always executed
-              });
-          }
-        })
         .catch(error => {
           // handle error
-          this.setState({ loading: false });
           console.log(error);
         })
         .finally(function() {
@@ -75,21 +69,28 @@ class CricAPI extends Component {
         });
     }
     // new CronJob(
-    //   "*/2 * * * *",
+    //   "*/20 * * * * *",
     //   () => {
-    //     console.log("You will see this message every 2nd minute");
+    //     console.log("You will see this message every 20th second");
     //     axios
-    //       .get(
-    //         "https://cricapi.com/api/cricketScore?apikey=Aa74ktAdYXVl4MGv4NIc2vE19yx1&unique_id=1144512"
+    //       .all([this.getMatch(), this.getScoreCard()])
+    //       .then(
+    //         axios.spread((match, scrCard) => {
+    //           console.log(match.data);
+    //           console.log(scrCard);
+    //           this.setState({
+    //             score: match.data.score,
+    //             stat: match.data.stat
+    //           });
+    //           this.setState({
+    //             scoreCard: scrCard.data,
+    //             batting: [...scrCard.data.data.batting],
+    //             bowling: [...scrCard.data.data.bowling]
+    //           });
+    //           // Both requests are now complete
+    //         })
     //       )
-    //       .then(response => {
-    //         console.log(response.data.matchStarted);
-    //         this.setState({
-    //           score: response.data.score,
-    //           stat: response.data.stat
-    //         });
-    //       })
-    //       .catch(function(error) {
+    //       .catch(error => {
     //         // handle error
     //         console.log(error);
     //       })
@@ -103,8 +104,8 @@ class CricAPI extends Component {
   }
   selectTeamScore1 = () => {
     let one = (
-      <ScoreCardTwo
-        data={this.state.scoreCard ? this.state.scoreCard.data : []}
+      <ScoreCardOne
+        // data={this.state.scoreCard ? this.state.scoreCard.data : []}
         batting={this.state.batting ? this.state.batting : []}
         bowling={this.state.bowling ? this.state.bowling : []}
         teamOne={this.state.team2}
@@ -117,7 +118,7 @@ class CricAPI extends Component {
   selectTeamScore2 = () => {
     this.setState({
       scoreCards: [
-        <ScoreCardOne
+        <ScoreCardTwo
           data={this.state.scoreCard ? this.state.scoreCard.data : []}
           batting={this.state.batting ? this.state.batting : []}
           bowling={this.state.bowling ? this.state.bowling : []}
@@ -136,6 +137,7 @@ class CricAPI extends Component {
         onclickTeam = (
           <table
             style={{ width: "80%", textAlign: "center", marginLeft: "80px" }}
+            className={classes.AppTeam}
           >
             <tbody>
               <tr>

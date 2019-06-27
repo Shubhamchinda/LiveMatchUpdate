@@ -9,19 +9,21 @@
   font-size: 1.2rem;
   box-shadow: 1px 1px 2px 2px black;
 }
-.App th:hover {
+.AppTeam th:hover,
+.AppTeam th:active,
+.AppTeam th.active {
   cursor: pointer;
   margin: auto;
   color: #d70022;
   font-size: 2rem;
 }
+
 .App tr {
   width: 100%;
   height: 10px;
 }
-.App,
-th {
-  margin: 0px 50px;
+.App th {
+  margin: auto;
   height: 20px;
   font-size: 1.3rem;
   /* background-color: #ededf0; */
