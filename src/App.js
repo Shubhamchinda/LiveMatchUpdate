@@ -28,13 +28,13 @@ class CricAPI extends Component {
   };
   getMatch = () => {
     return axios.get(
-      "https://cricapi.com/api/cricketScore?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144516"
+      "https://cricapi.com/api/cricketScore?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144517"
     );
   };
 
   getScoreCard = () => {
     return axios.get(
-      "https://cricapi.com/api/fantasySummary?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144516"
+      "https://cricapi.com/api/fantasySummary?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144517"
     );
   };
 

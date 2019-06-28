@@ -14,10 +14,7 @@ const teams = props => {
       <div className={classes.Teams}>
         <img src={link} alt={props.teamOne} />
         {props.matchStarted ? <p>Live</p> : <p>Match is yet to start</p>}
-        <img
-          src="https://www.perfectflags.com/image/data/FLAG%20IMAGES%20EBAY%20500/West%20indies500px.png"
-          alt={props.teamTwo}
-        />
+        <img src={link1} alt={props.teamTwo} />
       </div>
       {!props.matchStarted ? (
         <h4>
