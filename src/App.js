@@ -178,8 +178,8 @@ class CricAPI extends Component {
           >
             <tbody>
               <tr>
-                <th onClick={this.selectTeamScore1}>{this.state.team1}</th>
-                <th onClick={this.selectTeamScore2}>{this.state.team2}</th>
+                <th onClick={this.selectTeamScore1}>{this.state.team2}</th>
+                <th onClick={this.selectTeamScore2}>{this.state.team1}</th>
               </tr>
             </tbody>
           </table>
