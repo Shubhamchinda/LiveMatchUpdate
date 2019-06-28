@@ -18,7 +18,7 @@ class CricAPI extends Component {
     team2: `Pakistan`,
     firstRun: true,
     matchStart: false,
-    loading: false,
+    loading: true,
     scoreCard: {},
     batting: [],
     bowling: [],
