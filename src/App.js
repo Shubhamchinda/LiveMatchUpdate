@@ -90,7 +90,7 @@ class CricAPI extends Component {
               if (this.state.showTeamOne) {
                 this.setState({
                   scoreCards: (
-                    <ScoreCardTwo
+                    <ScoreCardOne
                       key="2324"
                       // data={this.state.scoreCard ? this.state.scoreCard.data : []}
                       batting={this.state.batting ? this.state.batting : []}
@@ -102,7 +102,7 @@ class CricAPI extends Component {
               } else {
                 this.setState({
                   scoreCards: [
-                    <ScoreCardOne
+                    <ScoreCardTwo
                       key="232asa4"
                       data={
                         this.state.scoreCard ? this.state.scoreCard.data : []
@@ -137,7 +137,7 @@ class CricAPI extends Component {
   selectTeamScore1 = () => {
     this.setState({
       scoreCards: [
-        <ScoreCardTwo
+        <ScoreCardOne
           key="2324"
           // data={this.state.scoreCard ? this.state.scoreCard.data : []}
           batting={this.state.batting ? this.state.batting : []}
@@ -154,7 +154,7 @@ class CricAPI extends Component {
       showTeamOne: false,
       showTeamTwo: true,
       scoreCards: [
-        <ScoreCardOne
+        <ScoreCardTwo
           key="2324"
           // data={this.state.scoreCard ? this.state.scoreCard.data : []}
           batting={this.state.batting ? this.state.batting : []}
