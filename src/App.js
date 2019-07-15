@@ -34,7 +34,7 @@ class CricAPI extends Component {
 
   getScoreCard = () => {
     return axios.get(
-      "https://cricapi.com/api/fantasySummary?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144530"
+      "https://cricapi.com/api/fantasySummary?apikey=WD2m3gGYAZe34f05eoRJtcN0Xvw1&unique_id=1144531"
     );
   };
 
