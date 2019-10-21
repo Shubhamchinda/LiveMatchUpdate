@@ -8,9 +8,8 @@ const teams = props => {
   let link1 = `https://www.countries-ofthe-world.com/flags-normal/flag-of-${props.teamTwo
     .split(" ")
     .join("-")}.png`;
-  console.log(props.matchStarted);
   return (
-    <React.Fragment>
+    <>
       <div className={classes.Teams}>
         <img src={link} alt={props.teamOne} />
         {props.matchStarted ? <p>Live</p> : <p>Match is yet to start</p>}
@@ -23,7 +22,7 @@ const teams = props => {
           <br /> {props.teamTwo}
         </h4>
       ) : null}
-    </React.Fragment>
+    </>
   );
 };
 
